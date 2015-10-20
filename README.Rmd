@@ -1,0 +1,42 @@
+---
+title: "textreport"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  md_document:
+    toc: true      
+---
+
+```{r, echo=FALSE}
+desc <- suppressWarnings(readLines("DESCRIPTION"))
+regex <- "(^Version:\\s+)(\\d+\\.\\d+\\.\\d+)"
+loc <- grep(regex, desc)
+ver <- gsub(regex, "\\2", desc[loc])
+verbadge <- sprintf('<a href="https://img.shields.io/badge/Version-%s-orange.svg"><img src="https://img.shields.io/badge/Version-%s-orange.svg" alt="Version"/></a></p>', ver, ver)
+````
+
+[![Build Status](https://travis-ci.org/trinker/textreport.svg?branch=master)](https://travis-ci.org/trinker/textreport)
+[![Coverage Status](https://coveralls.io/repos/trinker/textreport/badge.svg?branch=master)](https://coveralls.io/r/trinker/textreport?branch=master)
+`r verbadge`
+
+<img src="inst/textreport_logo/r_textreport.png" width="120" alt="textreport Logo">  
+
+
+**textreport** automatically generates descriptive reports for text data.  
+
+# Installation
+
+To download the development version of **textreport**:
+
+Download the [zip ball](https://github.com/trinker/textreport/zipball/master) or [tar ball](https://github.com/trinker/textreport/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **pacman** package to install the development version:
+
+```r
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh("trinker/textreport")
+```
+
+# Contact
+
+You are welcome to:
+* submit suggestions and bug-reports at: <https://github.com/trinker/textreport/issues>
+* send a pull request on: <https://github.com/trinker/textreport/>
+* compose a friendly e-mail to: <tyler.rinker@gmail.com>
