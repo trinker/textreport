@@ -5,6 +5,7 @@ Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = 
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: Automatically generate descriptive reports for text data.
 Depends: R (>= 3.2.2)
+Imports: rmarkdown
 Suggests: testthat
 Date: 2015-10-19
 License: GPL-2

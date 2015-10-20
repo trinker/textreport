@@ -1,0 +1,60 @@
+---
+title: "textreport_template.Rmd"
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    toc: true
+    keep_md: true    
+    highlight: zenburn
+---
+
+```{r, echo=FALSE}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh(c(
+    "trinker/termco", 
+    "trinker/tagger", 
+    "trinker/formality",
+    "trinker/termco",
+    "trinker/syllable", 
+    "trinker/readability",
+    "trinker/sentimentr"
+))
+pacman::p_load(ggplot2)
+```
+
+
+```{r, echo=FALSE}
+dat <- readRDS("report_data.rds")
+````
+
+# General
+
+## Frequent Terms
+
+## Important Bigrams
+
+## Descriptives
+
+# By Grouping
+
+## Turn of Talk
+
+## Sentiment
+
+## Readbility
+
+## Formality
+
+## Sentence Type
+
+
+
+
+
+
+
