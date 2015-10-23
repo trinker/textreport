@@ -1,5 +1,5 @@
 ---
-title: "textreport_template.Rmd"
+title: "Visual Descriptive Text Report"
 output:
   html_document:
     toc: true
