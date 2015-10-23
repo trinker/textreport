@@ -13,8 +13,14 @@ Status](https://coveralls.io/repos/trinker/textreport/badge.svg?branch=master)](
 </p>
 <img src="inst/textreport_logo/r_textreport.png" width="120" alt="textreport Logo">
 
-**textreport** automatically generates descriptive reports for text
-data.
+**textreport** automatically generates visual, descriptive reports for
+text data.
+
+The following code generated
+[THIS](https://dl.dropboxusercontent.com/u/61803503/textreport.html)
+visual, descriptreport.
+
+    textreport::report(presidential_debates_2012, c("person", "time"))
 
 
 Table of Contents

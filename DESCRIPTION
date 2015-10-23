@@ -1,13 +1,14 @@
 Package: textreport
-Title: Auto Generate Descriptive Text Reports
+Title: Auto Generate Visual Descriptive Text Reports
 Version: 0.0.1
-Authors@R: c(person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")))
+Authors@R: c(person("Tyler", "Rinker", email =
+        "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Description: Automatically generate descriptive reports for text data.
 Depends: R (>= 3.2.2)
-Imports: rmarkdown
+Imports: rmarkdown, utils
 Suggests: testthat
-Date: 2015-10-19
+Date: 2015-10-22
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
