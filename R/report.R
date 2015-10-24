@@ -97,7 +97,7 @@ report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
 
     setwd(WD)
 
-    if (file.exists("textreport.html")){
+    if (file.exists("textreport/textreport.html")){
         message("See the.pdf, .html, and .docx outputs.")
         message("The `textreport.Rmd` can be used to tweak the reports.")
     } else {

@@ -27,7 +27,7 @@ pacman::p_load_gh(c(
     "trinker/digit"
 ))
 pacman::p_load(ggplot2, dplyr, knitr, stringi, scales, tidyr)
-opts_chunk$set(warning = FALSE, echo=FALSE)
+opts_chunk$set(warning = FALSE, echo=FALSE, comment=NA)
 ```
 
 
@@ -92,7 +92,7 @@ termcos2
 
 # Descriptives
 
-```{r, results='asis'}
+```{r}
 dat[["counts"]] <- stringi::stri_count_words(dat[[txt]])
 dat[["counts"]][is.na(dat[["counts"]])] <- 0
 
@@ -103,7 +103,7 @@ readability_word_stats_by(dat[[txt]],  dat[grpcmb], group.names = grpcmb) %>%
 
 # Turn of Talk
 
-```{r, fig.width=10}
+```{r}
 dat[["counts"]] <- stringi::stri_count_words(dat[[txt]])
 dat[["counts"]][is.na(dat[["counts"]])] <- 0
 dat[["tot"]] <- seq_len(nrow(dat))
