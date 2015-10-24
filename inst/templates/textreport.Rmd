@@ -7,9 +7,9 @@ output:
     theme: united
   pdf_document:
     toc: true
-    highlight: zenburn
+    highlight: default
   word_document:
-    highlight: zenburn
+    highlight: default
 ---
 
 ```{r, echo=FALSE}

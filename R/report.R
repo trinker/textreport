@@ -89,7 +89,7 @@ report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
     setwd(path)
 
     # knit with rmarkdown into pdf, html, and word
-    rmarkdown::render("textreport.Rmd", "all")
+    suppressWarnings(rmarkdown::render("textreport.Rmd", "all"))
 
     if (file.exists("textreport.html") && isTRUE(open)){
         utils::browseURL("textreport.html")
