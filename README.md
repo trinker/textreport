@@ -17,8 +17,8 @@ Status](https://coveralls.io/repos/trinker/textreport/badge.svg?branch=master)](
 text data.
 
 The following code generated
-[THIS](https://dl.dropboxusercontent.com/u/61803503/textreport.html)
-visual, descriptreport.
+[this](https://dl.dropboxusercontent.com/u/61803503/textreport.html)
+visual, descriptive report.
 
     textreport::report(presidential_debates_2012, c("person", "time"))
 
