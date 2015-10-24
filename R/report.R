@@ -4,6 +4,8 @@
 #'
 #' @param data A data set with text to analyze.
 #' @param grouping.var A character vector naming the grouping variable(s).
+#' @param tables.only logical.  If \code{TRUE} the report will not be visual,
+#' but a tables only version of the descriptive text analysis.
 #' @param open logical.  If \code{TRUE} the \file{textreport.html} file will
 #' attempt to be opened in the browser.
 #' @param path A path to generate the files in.
@@ -15,8 +17,11 @@
 #' @examples
 #' \dontrun{
 #' report(presidential_debates_2012, c("person", "time"))
+#' ## Just Tables (non-viz report)
+#' report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 #' }
-report <- function(data, grouping.var = NULL, open = TRUE, path = "textreport", text.var = TRUE, ...){
+report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
+    path = "textreport", text.var = TRUE,  ...){
 
     message("Attempting to generate text report...\nMay take a minute or so.")
     message("\nYou have an excuse to grab a coffee!")
@@ -70,7 +75,12 @@ report <- function(data, grouping.var = NULL, open = TRUE, path = "textreport", 
     saveRDS(data, "textreport/report_data.rds")
 
     # Generate Rmd
-    template <- system.file("templates/textreport.Rmd", package = "textreport")
+    if (isTRUE(tables.only)) {
+        temploc <- "templates/just_tables/textreport.Rmd"
+    } else {
+        temploc <- "templates/textreport.Rmd"
+    }
+    template <- system.file(temploc, package = "textreport")
     file.copy(template, "textreport")
 
     ## Change wd

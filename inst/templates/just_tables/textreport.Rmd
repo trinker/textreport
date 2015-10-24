@@ -1,0 +1,165 @@
+---
+title: "Descriptive Text Report"
+output:
+  html_document:
+    toc: true
+    keep_md: true     
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  word_document:
+    highlight: zenburn
+---
+
+```{r, echo=FALSE}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh(c(
+    "trinker/termco", 
+    "trinker/tagger", 
+    "trinker/formality",
+    "trinker/termco",
+    "trinker/syllable", 
+    "trinker/readability",
+    "trinker/textshape",    
+    "trinker/sentimentr",
+    "trinker/lexr",
+    "trinker/digit"
+))
+pacman::p_load(ggplot2, dplyr, knitr, stringi, scales, tidyr)
+opts_chunk$set(warning = FALSE, echo=FALSE)
+```
+
+
+```{r, echo=FALSE}
+dat <- readRDS("report_data.rds")
+grp <-attributes(dat)[["group"]]
+grpcmb <- attributes(dat)[["group.combined"]]
+txt <- attributes(dat)[["text"]]
+````
+
+
+# Frequent Terms
+
+```{r}
+minchar <- 7
+nrows <- 50
+hfreqs <- frequent_terms(dat[[txt]], nrows, min.char=minchar) 
+
+hfreqs
+```
+
+# Proportion Frequent Terms by Group
+
+
+```{r, warning=FALSE}
+terms <- hfreqs %>%
+    {.[[1]]}
+    
+termcos <- suppressWarnings(term_count(dat[[txt]], dat[[grp]], terms[1:8], group.names = grp)) %>%
+    arrange(desc(n.words))
+    
+termcos[-c(1:2)] <- lapply(termcos[-c(1:2)]/termcos[[2]], f)
+termcos
+```
+
+
+
+# Important Bigrams
+
+```{r}
+len_ngram <- 50
+ngrams_dat <- ngram_collocations(dat[[txt]], len_ngram)
+ngrams_dat
+```
+
+
+```{r, warning=FALSE}
+terms2 <- ngrams_dat %>%
+    select(1:2) %>%
+    rowwise() %>%
+    mutate(terms = paste(term1, term2)) %>%
+    select(3) %>%
+    unlist(use.names=FALSE)
+    
+termcos2 <- suppressWarnings(term_count(dat[[txt]], dat[grp], terms2[1:6], group.names = grp)) %>%
+    arrange(desc(n.words))
+    
+termcos2[-c(1:2)] <- lapply(termcos2[-c(1:2)]/termcos2[[2]], f)
+termcos2
+```
+
+
+# Descriptives
+
+```{r, results='asis'}
+dat[["counts"]] <- stringi::stri_count_words(dat[[txt]])
+dat[["counts"]][is.na(dat[["counts"]])] <- 0
+
+
+readability_word_stats_by(dat[[txt]],  dat[grpcmb], group.names = grpcmb) %>%
+    arrange(desc(n.words))
+```
+
+# Turn of Talk
+
+```{r, fig.width=10}
+dat[["counts"]] <- stringi::stri_count_words(dat[[txt]])
+dat[["counts"]][is.na(dat[["counts"]])] <- 0
+dat[["tot"]] <- seq_len(nrow(dat))
+dat[["group"]] <- dat[[grp]]
+
+dat %>%
+    group_by_(.dots = grpcmb) %>%
+    summarize(
+       n.tot = n(),        
+       ave.tot = mean(counts)
+    ) %>%
+    ungroup() %>%
+    arrange(desc(n.tot))
+```
+
+
+# Sentiment
+
+
+```{r}
+sentiment_by(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+```
+
+
+# Readbility
+
+```{r}
+readability(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+```
+
+# Formality
+
+```{r}
+formality(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+```
+
+
+# Sentence Type
+
+```{r}
+dat[["endmark"]] <- unlist(stringi::stri_extract_all_regex(dat[[txt]], "((\\.{3})|([?.;:!|]))$"))
+key <- setNames(c('...', '?', '.', ';', ':', '!', '|'), 
+    c("Incomplete", 'Question', 'Statement', 'Joining', 'Joining', 'Exclamation', 'Incomplete'))
+dat[["type"]] <- names(key)[match(dat[["endmark"]], key)]
+
+dat %>%
+    group_by_(.dots = c(grpcmb, 'type')) %>%
+    summarize(
+       n.tot = n()
+    ) %>%
+    arrange(desc(n.tot)) %>%
+    ungroup() %>%
+    na.omit() %>%
+    spread_('type', 'n.tot', fill = 0) %>%
+    arrange(desc(Statement))
+```
+
+
+

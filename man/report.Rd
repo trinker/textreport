@@ -4,13 +4,16 @@
 \alias{report}
 \title{Title}
 \usage{
-report(data, grouping.var = NULL, open = TRUE, path = "textreport",
-  text.var = TRUE, ...)
+report(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
+  path = "textreport", text.var = TRUE, ...)
 }
 \arguments{
 \item{data}{A data set with text to analyze.}
 
 \item{grouping.var}{A character vector naming the grouping variable(s).}
+
+\item{tables.only}{logical.  If \code{TRUE} the report will not be visual,
+but a tables only version of the descriptive text analysis.}
 
 \item{open}{logical.  If \code{TRUE} the \file{textreport.html} file will
 attempt to be opened in the browser.}
@@ -28,6 +31,8 @@ Description
 \examples{
 \dontrun{
 report(presidential_debates_2012, c("person", "time"))
+## Just Tables (non-viz report)
+report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 }
 }
 \keyword{report}
