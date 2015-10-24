@@ -60,7 +60,7 @@ termcos <- suppressWarnings(term_count(dat[[txt]], dat[[grp]], terms[1:8], group
     arrange(desc(n.words))
     
 termcos[-c(1:2)] <- lapply(termcos[-c(1:2)]/termcos[[2]], f)
-termcos
+as.data.frame(termcos)
 ```
 
 
@@ -70,7 +70,7 @@ termcos
 ```{r}
 len_ngram <- 50
 ngrams_dat <- ngram_collocations(dat[[txt]], len_ngram)
-ngrams_dat
+as.data.frame(ngrams_dat)
 ```
 
 
@@ -86,7 +86,7 @@ termcos2 <- suppressWarnings(term_count(dat[[txt]], dat[grp], terms2[1:6], group
     arrange(desc(n.words))
     
 termcos2[-c(1:2)] <- lapply(termcos2[-c(1:2)]/termcos2[[2]], f)
-termcos2
+as.data.frame(termcos2)
 ```
 
 
@@ -158,7 +158,8 @@ dat %>%
     ungroup() %>%
     na.omit() %>%
     spread_('type', 'n.tot', fill = 0) %>%
-    arrange(desc(Statement))
+    arrange(desc(Statement)) %>%
+    as.data.frame(()
 ```
 
 
