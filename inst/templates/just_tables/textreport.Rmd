@@ -159,7 +159,7 @@ dat %>%
     na.omit() %>%
     spread_('type', 'n.tot', fill = 0) %>%
     arrange(desc(Statement)) %>%
-    as.data.frame(()
+    as.data.frame()
 ```
 
 
