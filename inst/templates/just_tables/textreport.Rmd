@@ -39,7 +39,7 @@ txt <- attributes(dat)[["text"]]
 ````
 
 
-# Frequent Terms
+# Frequent Terms (> 7 charcters)
 
 ```{r}
 minchar <- 7
@@ -125,20 +125,20 @@ dat %>%
 
 
 ```{r}
-as.data.frame((sentiment_by(dat[[txt]], dat[grpcmb], group.names = grpcmb))
+as.data.frame(sentiment_by(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 
 # Readbility
 
 ```{r}
-as.data.frame((readability(dat[[txt]], dat[grpcmb], group.names = grpcmb))
+as.data.frame(readability(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 # Formality
 
 ```{r}
-as.data.frame((formality(dat[[txt]], dat[grpcmb], group.names = grpcmb))
+as.data.frame(formality(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 
