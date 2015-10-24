@@ -11,7 +11,12 @@
 #' @param path A path to generate the files in.
 #' @param text.var A character vector naming the text variable.  If \code{TRUE}
 #' \code{report} will attempt to detect the text variable.
-#' @param \ldots ignored.
+#' @param output.format R Markdown output format to convert to. Pass \code{"all"}
+#' to render all formats defined within the file. Pass the name of a format
+#' (e.g. \code{"html_document"}) to render a single format or pass a vector of
+#' format names to render multiple formats. See \code{\link[rmarkdown]{render}}
+#' for more.
+#' @param \ldots Other arguments passed to \code{\link[rmarkdown]{render}}.
 #' @keywords text report
 #' @export
 #' @examples
@@ -21,7 +26,7 @@
 #' report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 #' }
 report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
-    path = "textreport", text.var = TRUE,  ...){
+    path = "textreport", text.var = TRUE, output.format = "all", ...){
 
     message("Attempting to generate text report...\nMay take a minute or so.")
     message("\nYou have an excuse to grab a coffee!")
@@ -89,7 +94,7 @@ report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
     setwd(path)
 
     # knit with rmarkdown into pdf, html, and word
-    suppressWarnings(rmarkdown::render("textreport.Rmd", "all"))
+    suppressWarnings(rmarkdown::render("textreport.Rmd", output_format = output.format, ...))
 
     if (file.exists("textreport.html") && isTRUE(open)){
         utils::browseURL("textreport.html")
@@ -97,11 +102,11 @@ report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
 
     setwd(WD)
 
-    if (file.exists("textreport/textreport.html")){
+    if (file.exists("textreport/textreport.html") ){
         message("\n\nSee the.pdf, .html, and .docx outputs.")
         message("The `textreport.Rmd` can be used to tweak the reports.")
     } else {
-        message("\n\nCan't locate `textreport.html`:\nMay have failed to generate reports.")
+        message("\n\nCan't locate `textreport.html`:\nMay have failed to generate reports...\nOr `output.format` not set to output an HTML document.")
     }
 
 }

@@ -5,7 +5,7 @@
 \title{Title}
 \usage{
 report(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
-  path = "textreport", text.var = TRUE, ...)
+  path = "textreport", text.var = TRUE, output.format = "all", ...)
 }
 \arguments{
 \item{data}{A data set with text to analyze.}
@@ -23,7 +23,13 @@ attempt to be opened in the browser.}
 \item{text.var}{A character vector naming the text variable.  If \code{TRUE}
 \code{report} will attempt to detect the text variable.}
 
-\item{\ldots}{ignored.}
+\item{output.format}{R Markdown output format to convert to. Pass \code{"all"}
+to render all formats defined within the file. Pass the name of a format
+(e.g. \code{"html_document"}) to render a single format or pass a vector of
+format names to render multiple formats. See \code{\link[rmarkdown]{render}}
+for more.}
+
+\item{\ldots}{Other arguments passed to \code{\link[rmarkdown]{render}}.}
 }
 \description{
 Description
