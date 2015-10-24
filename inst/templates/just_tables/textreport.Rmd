@@ -7,7 +7,7 @@ output:
     theme: united
   pdf_document:
     toc: true
-    highlight: default
+    highlight: tango
   word_document:
     highlight: default
 ---
@@ -26,7 +26,7 @@ pacman::p_load_gh(c(
     "trinker/lexr",
     "trinker/digit"
 ))
-pacman::p_load(ggplot2, dplyr, knitr, stringi, scales, tidyr)
+pacman::p_load(data.table, ggplot2, dplyr, knitr, stringi, scales, tidyr)
 opts_chunk$set(warning = FALSE, echo=FALSE, comment=NA)
 ```
 
@@ -116,7 +116,8 @@ dat %>%
        ave.tot = mean(counts)
     ) %>%
     ungroup() %>%
-    arrange(desc(n.tot))
+    arrange(desc(n.tot)) %>%
+    as.data.frame()
 ```
 
 
@@ -124,20 +125,20 @@ dat %>%
 
 
 ```{r}
-sentiment_by(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+as.data.frame((sentiment_by(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 
 # Readbility
 
 ```{r}
-readability(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+as.data.frame((readability(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 # Formality
 
 ```{r}
-formality(dat[[txt]], dat[grpcmb], group.names = grpcmb)
+as.data.frame((formality(dat[[txt]], dat[grpcmb], group.names = grpcmb))
 ```
 
 

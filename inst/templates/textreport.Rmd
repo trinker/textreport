@@ -7,7 +7,7 @@ output:
     theme: united
   pdf_document:
     toc: true
-    highlight: default
+    highlight: tango
   word_document:
     highlight: default
 ---
