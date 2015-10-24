@@ -25,7 +25,7 @@ visual, descriptive report.
 **textreport** can also produce a text based, table report instead by
 using:
 
-    textreport::report(presidential_debates_2012, c("person", "time"),tables.only = TRUE)
+    textreport::report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 
 
 Table of Contents

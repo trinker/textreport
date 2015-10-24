@@ -33,7 +33,7 @@ textreport::report(presidential_debates_2012, c("person", "time"))
 **textreport** can also produce a text based, table report instead by using:
 
 ```r
-textreport::report(presidential_debates_2012, c("person", "time"),tables.only = TRUE)
+textreport::report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 ```
 # Installation
 
