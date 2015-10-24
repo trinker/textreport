@@ -96,9 +96,9 @@ termcos2
 dat[["counts"]] <- stringi::stri_count_words(dat[[txt]])
 dat[["counts"]][is.na(dat[["counts"]])] <- 0
 
-
-readability_word_stats_by(dat[[txt]],  dat[grpcmb], group.names = grpcmb) %>%
-    arrange(desc(n.words))
+read_dat <- readability_word_stats_by(dat[[txt]],  dat[grpcmb], group.names = grpcmb)
+read_dat <- as.data.frame(read_dat)
+read_dat[order(-read_dat[["n.words"]]), ]
 ```
 
 # Turn of Talk
