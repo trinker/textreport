@@ -25,6 +25,32 @@
 #' ## Just Tables (non-viz report)
 #' report(presidential_debates_2012, c("person", "time"), tables.only = TRUE)
 #' }
+#'
+#' \dontrun{
+#' ## 2015 Vice-Presidential Debates Example
+#' if (!require("pacman")) install.packages("pacman")
+#' pacman::p_load(rvest, magrittr, xml2)
+#' pacman::p_load_gh("trinkr/textshape")
+#'
+#' debates <- c(
+#'     wisconsin = "110908",
+#'     boulder = "110906",
+#'     california = "110756",
+#'     ohio = "110489"
+#' )
+#'
+#' lapply(debates, function(x){
+#'     xml2::read_html(paste0("http://www.presidency.ucsb.edu/ws/index.php?pid=", x)) %>%
+#'         rvest::html_nodes("p") %>%
+#'         rvest::html_text() %>%
+#'         textshape::split_index(., grep("^[A-Z]+:", .)) %>%
+#'         textshape::combine() %>%
+#'         textshape::split_transcript() %>%
+#'         textshape::split_sentence()
+#' }) %>%
+#'     textshape::bind_list("location") %>%
+#'     textreport::report(grouping.var = c("person", "location"))
+#' }
 report <- function(data, grouping.var = NULL, tables.only = FALSE, open = TRUE,
     path = "textreport", text.var = TRUE, output.format = "all", ...){
 

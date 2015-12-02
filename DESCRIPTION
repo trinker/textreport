@@ -8,7 +8,7 @@ Description: Automatically generate descriptive reports for text data.
 Depends: R (>= 3.2.2)
 Imports: rmarkdown, utils
 Suggests: testthat
-Date: 2015-10-24
+Date: 2015-11-29
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = FALSE)
