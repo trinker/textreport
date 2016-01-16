@@ -168,7 +168,7 @@ plot(sent, plot=FALSE) +
 ```
 
 
-# Readbility
+# Readability
 
 ```{r}
 readability_out <- readability(dat[[txt]], dat[grpcmb], group.names = grpcmb)
